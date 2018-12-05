@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <span>氏名: </span>
+    <input type="text"  name="name"  placeholder="氏名" formControlName="name">
+    {{form.controls['name'].errors | json}}
+    <div *ngIf="form.controls['name'].invalid && (form.controls['name'].touched || form.controls['name'].dirty)">
+      <div *ngIf="form.controls['name'].errors.required">
+        氏名は必須です
+      </div>
+      <div *ngIf="form.controls['name'].errors.kado">
+        角ではありません。
+      </div>
+    </div>
+  </div>
+  <fieldset formGroupName="address">
+    <legend>住所</legend>
+    <div>
+      <input type="text" name="zipCode"  placeholder="〒" formControlName="zipCode">
+    </div>
+    <div>
+      <select name="prefecture" formControlName="prefecture">
+        <option [value]="undefined" selected>--都道府県--</option>
+        <option *ngFor="let pre of prefectures" [value]="pre">{{pre}}</option>
+      </select>
+    </div>
+    <div>
+      <input type="text" name="otherAddress"  placeholder="住所" formControlName="otherAddress">
+    </div>
+  </fieldset>
+  <div>
+    <input type="email" name="email"  formControlName="email" placeholder="メールアドレス">
+  </div>
+  <div>
+    <input type="email" name="emailConfirm"  formControlName="emailConfirm" placeholder="メールアドレス(確認)">
+  </div>
+  <label>
+    <input type="checkbox" name="mailingList" formControlName="mailingList" >メーリングリストを購読する
+  </label>
+
+  <button type="submit">登録</button><button type="reset">キャンセル</button>
+</form>

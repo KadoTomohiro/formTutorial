@@ -1,0 +1,7 @@
+input[name=name].ng-invalid.ng-dirty {
+  background-color: red;
+}
+[required]:before {
+  content: '*';
+  color: red;
+}

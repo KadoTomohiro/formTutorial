@@ -1,0 +1,38 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div>
+    <span>氏名(必須): </span>
+    <input type="text"  name="name" [(ngModel)]="name" placeholder="氏名" required #nameControl="ngModel">
+    {{nameControl.errors | json}}
+    <div *ngIf="nameControl.invalid && (nameControl.touched || nameControl.dirty)">
+      <div *ngIf="nameControl.errors.required">
+        氏名は必須です
+      </div>
+    </div>
+  </div>
+  <fieldset>
+    <legend>住所</legend>
+    <div>
+      <input type="text" name="zipCode" [(ngModel)]="address.zipCode" placeholder="〒">
+    </div>
+    <div>
+      <select name="prefecture" [(ngModel)]="address.prefecture">
+        <option [value]="undefined" selected>--都道府県--</option>
+        <option *ngFor="let pre of prefectures" [value]="pre">{{pre}}</option>
+      </select>
+    </div>
+    <div>
+      <input type="text" name="otherAddress" [(ngModel)]="address.otherAddress" placeholder="住所">
+    </div>
+  </fieldset>
+  <div>
+    <input type="email" name="email" [(ngModel)]="email" placeholder="メールアドレス">
+  </div>
+  <div>
+    <input type="email" name="emailConfirm" [(ngModel)]="emailConfirm" placeholder="メールアドレス(確認)">
+  </div>
+  <label>
+    <input type="checkbox" name="mailingList" [(ngModel)]="mailingList">メーリングリストを購読する
+  </label>
+
+  <button type="submit">登録</button><button type="reset">キャンセル</button>
+</form>

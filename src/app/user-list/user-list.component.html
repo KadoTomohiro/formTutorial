@@ -1,0 +1,15 @@
+<ul>
+  <li *ngFor="let user of users | async">
+    <article>
+      <h3>{{user.name}}</h3>
+      <address>
+        <span>〒{{user.address.zipCode | zipCode}}</span>
+        <div>{{user.address.prefecture}} {{user.address.otherAddress}}</div>
+      </address>
+      <p>email: {{user.email}}</p>
+      <p *ngIf="user.mailingList">メーリングリスト購読中</p>
+    </article>
+  </li>
+</ul>
+
+
